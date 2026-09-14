@@ -10,6 +10,12 @@ export interface DedicatedSong {
   tag: string;
 }
 
+const resolveAudioPath = (filename: string) => {
+  const base = import.meta.env.BASE_URL || './';
+  const cleanBase = base.endsWith('/') ? base : `${base}/`;
+  return `${cleanBase}${filename}`;
+};
+
 export const DEDICATED_PLAYLIST: DedicatedSong[] = [
   {
     id: 'solo-tuyo',
@@ -17,7 +23,7 @@ export const DEDICATED_PLAYLIST: DedicatedSong[] = [
     artist: 'Felipe Peláez',
     quote: '«Déjame cambiarte tu destino, que me sobran ganas de ser solo tuyo, mi reina...»',
     cover: 'https://images.unsplash.com/photo-1597848212624-a19eb35e2651?q=80&w=800&auto=format&fit=crop',
-    src: '/solo-tuyo.mp3',
+    src: resolveAudioPath('solo-tuyo.mp3'),
     tag: '🌻 La principal',
   },
   {
@@ -26,7 +32,7 @@ export const DEDICATED_PLAYLIST: DedicatedSong[] = [
     artist: 'Rafa Pérez',
     quote: '«Voy a gritar que me encantas... ¡porque me gustas tú, tú me gustas mujer!»',
     cover: 'https://images.unsplash.com/photo-1518895949257-7621c3c786d7?q=80&w=800&auto=format&fit=crop',
-    src: '/la-serenata.mp3',
+    src: resolveAudioPath('la-serenata.mp3'),
     tag: '🪗 Serenata',
   },
   {
@@ -35,7 +41,7 @@ export const DEDICATED_PLAYLIST: DedicatedSong[] = [
     artist: 'Churo Díaz & Elías Mendoza',
     quote: '«Tienes ese no sé qué que me enamora, esa miradita... Yo te quiero a ti, solamente a ti»',
     cover: 'https://images.unsplash.com/photo-1490750967868-88aa4486c946?q=80&w=800&auto=format&fit=crop',
-    src: '/el-jueguito.mp3',
+    src: resolveAudioPath('el-jueguito.mp3'),
     tag: '💛 De verdad',
   },
   {
@@ -44,7 +50,7 @@ export const DEDICATED_PLAYLIST: DedicatedSong[] = [
     artist: 'Morat',
     quote: '«Yo solo quiero perderme en tu pelo y le agradezco al cielo que te conocí...»',
     cover: 'https://images.unsplash.com/photo-1509198397868-475647b2a1e5?q=80&w=800&auto=format&fit=crop',
-    src: '/tu-tan-guapa.mp3',
+    src: resolveAudioPath('tu-tan-guapa.mp3'),
     tag: '❤️ Para ti',
   },
 ];
