@@ -99,7 +99,7 @@ body {
 }
 
 .card.open {
-  top: -55px !important;
+  top: -65px !important;
 }
 
 .card:before {

@@ -311,7 +311,7 @@ export default function App() {
             id="valentine-card"
             className={`card ${cardIsUp ? 'open' : ''}`}
             style={{
-              top: cardIsUp ? '-55px' : '5px',
+              top: cardIsUp ? '-65px' : '5px',
             }}
           >
             {/* Thoughtful Text: spontaneous, real & sincere */}
@@ -352,6 +352,18 @@ export default function App() {
               <div className="five"></div>
             </div>
           </div>
+
+          {/* Firma discreta en la esquinita del sobre */}
+          <span
+            id="envelope-author-signature"
+            className="absolute bottom-2.5 right-3.5 z-20 pointer-events-none select-none text-xs font-semibold text-amber-100/90 tracking-wide"
+            style={{
+              fontFamily: "'Dancing Script', 'Caveat', cursive, sans-serif",
+              textShadow: '0 1px 3px rgba(0, 0, 0, 0.4)',
+            }}
+          >
+            De: Temis
+          </span>
         </div>
 
         {/* Shadow */}
@@ -398,6 +410,17 @@ export default function App() {
             ? '♡ Haz clic para guardar la cartita ♡'
             : '♡ Pasa el cursor o haz clic en el sobre para leerlo ♡'}
         </p>
+
+        {/* Fecha de creación del detalle con tipografía bonita */}
+        <span
+          id="creation-date-footer"
+          className="text-base sm:text-lg text-rose-900/80 font-semibold tracking-wider select-none -mt-1"
+          style={{
+            fontFamily: "'Dancing Script', 'Caveat', cursive, sans-serif",
+          }}
+        >
+          14/09/2026
+        </span>
       </div>
     </div>
   );

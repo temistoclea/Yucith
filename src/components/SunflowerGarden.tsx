@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { DedicatedMusicPlayer } from './DedicatedMusicPlayer';
+import { PWAInstallButton } from './PWAInstallButton';
 
 interface SunflowerGardenProps {
   onBack?: () => void;
@@ -109,8 +110,12 @@ export const SunflowerGarden: React.FC<SunflowerGardenProps> = ({ onBack, recipi
           🌻 Un detalle en un día cualquiera
         </span>
         <h1
-          className="text-white text-2xl sm:text-4xl font-bold tracking-wide drop-shadow-[0_2px_12px_rgba(0,0,0,0.8)]"
-          style={{ fontFamily: "'Caveat', cursive, sans-serif" }}
+          id="garden-title-recipient"
+          className="text-white text-3xl sm:text-5xl font-bold tracking-wide select-none"
+          style={{
+            fontFamily: "'Dancing Script', 'Caveat', cursive, sans-serif",
+            textShadow: '0 2px 8px rgba(0, 0, 0, 0.7), 0 0 16px rgba(251, 191, 36, 0.3)',
+          }}
         >
           Para ti{recipientName ? `, ${recipientName}` : ''}
         </h1>
@@ -433,6 +438,18 @@ export const SunflowerGarden: React.FC<SunflowerGardenProps> = ({ onBack, recipi
             <div className="flower__grass__overlay"></div>
           </div>
         </div>
+      </div>
+
+      {/* Botón discreto para instalar en el móvil */}
+      <div
+        id="garden-pwa-install-container"
+        className="fixed z-40"
+        style={{
+          bottom: 'max(0.85rem, calc(env(safe-area-inset-bottom, 0px) + 0.5rem))',
+          right: 'max(0.85rem, calc(env(safe-area-inset-right, 0px) + 0.5rem))',
+        }}
+      >
+        <PWAInstallButton variant="garden" />
       </div>
     </div>
   );
