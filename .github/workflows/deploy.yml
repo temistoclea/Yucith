@@ -1,20 +1,15 @@
 name: Deploy Vite app to GitHub Pages
 
 on:
-  # Se ejecuta cada vez que haces push a la rama principal (main o master)
   push:
     branches: ["main", "master"]
-
-  # Permite ejecutar el despliegue manualmente desde la pestaña Actions en GitHub
   workflow_dispatch:
 
-# Permisos requeridos para desplegar en GitHub Pages
 permissions:
   contents: read
   pages: write
   id-token: write
 
-# Permite solo un despliegue concurrente a la vez
 concurrency:
   group: "pages"
   cancel-in-progress: false
@@ -30,10 +25,9 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 20
-          cache: 'npm'
 
       - name: Instalar dependencias
-        run: npm ci || npm install
+        run: npm install
 
       - name: Compilar proyecto (Vite)
         run: npm run build
