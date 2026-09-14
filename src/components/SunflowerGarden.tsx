@@ -117,10 +117,10 @@ export const SunflowerGarden: React.FC<SunflowerGardenProps> = ({ onBack, recipi
             textShadow: '0 2px 8px rgba(0, 0, 0, 0.7), 0 0 16px rgba(251, 191, 36, 0.3)',
           }}
         >
-          Para ti{recipientName ? `, ${recipientName}` : ''}
+          Para ti{`, ${(!recipientName || recipientName.trim().toLowerCase() === 'yucit') ? 'Yucith' : recipientName}`}
         </h1>
         <p className="mt-2 text-sm sm:text-base text-amber-100/90 max-w-md leading-relaxed drop-shadow-md font-light">
-          Hoy no es San Valentín ni ninguna fecha especial. Me dijiste que no tenías flor favorita, así que quise regalarte y compartirte las mías: mis girasoles bajo las estrellas. ✨
+          Hoy no es San Valentín ni ninguna fecha especial. Me dijiste que no tenías flor favorita, así que quise regalarte y compartirte las mías: mis girasoles bajo las estrellas. 🌻
         </p>
 
         <div className="mt-4 flex flex-wrap items-center justify-center gap-2.5">
@@ -130,7 +130,7 @@ export const SunflowerGarden: React.FC<SunflowerGardenProps> = ({ onBack, recipi
             className="px-4 py-1.5 rounded-full text-xs sm:text-sm font-semibold bg-amber-500 hover:bg-amber-400 text-slate-900 shadow-[0_0_15px_rgba(245,158,11,0.5)] transition-all duration-300 hover:scale-105 active:scale-95 flex items-center gap-2"
           >
             <span>🎵</span>
-            <span>Escuchar canción que pensé para ti</span>
+            <span>Escuchar la canción que elegí para ti</span>
           </button>
 
           {onBack && (

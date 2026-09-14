@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { SunflowerGarden } from './components/SunflowerGarden';
 import { IntroGreeting } from './components/IntroGreeting';
 import { DedicatedMusicPlayer } from './components/DedicatedMusicPlayer';
+import { CreatorModal } from './components/CreatorModal';
 
 export default function App() {
   const [hasEntered, setHasEntered] = useState(false);
@@ -9,16 +10,28 @@ export default function App() {
   const [isHovered, setIsHovered] = useState(false);
   const [showGarden, setShowGarden] = useState(false);
   const [showMusicPlayer, setShowMusicPlayer] = useState(false);
+  const [showCreatorModal, setShowCreatorModal] = useState(false);
   const [recipientName, setRecipientName] = useState(() => {
     try {
       const urlParams = new URLSearchParams(window.location.search);
       const queryName = urlParams.get('para') || urlParams.get('name');
       if (queryName && queryName.trim()) {
         const cleaned = queryName.trim();
-        localStorage.setItem('un_detalle_recipient_name', cleaned);
-        return cleaned;
+        const resolved = cleaned.toLowerCase() === 'yucit' ? 'Yucith' : cleaned;
+        localStorage.setItem('un_detalle_recipient_name', resolved);
+        return resolved;
       }
-      return localStorage.getItem('un_detalle_recipient_name') || 'Yucith';
+      const stored = localStorage.getItem('un_detalle_recipient_name');
+      if (stored) {
+        const trimmed = stored.trim();
+        if (trimmed.toLowerCase() === 'yucit') {
+          localStorage.setItem('un_detalle_recipient_name', 'Yucith');
+          return 'Yucith';
+        }
+        return trimmed;
+      }
+      localStorage.setItem('un_detalle_recipient_name', 'Yucith');
+      return 'Yucith';
     } catch {
       return 'Yucith';
     }
@@ -26,13 +39,27 @@ export default function App() {
   const [isEditingName, setIsEditingName] = useState(false);
 
   const handleUpdateName = (name: string) => {
-    setRecipientName(name);
+    const resolved = name.trim().toLowerCase() === 'yucit' ? 'Yucith' : name;
+    setRecipientName(resolved);
     try {
-      localStorage.setItem('un_detalle_recipient_name', name);
+      localStorage.setItem('un_detalle_recipient_name', resolved);
     } catch {
       // localStorage may be unavailable
     }
   };
+
+  // Ensure stored name is corrected if previously cached as Yucit without H
+  useEffect(() => {
+    try {
+      const stored = localStorage.getItem('un_detalle_recipient_name');
+      if (!stored || stored.trim().toLowerCase() === 'yucit') {
+        localStorage.setItem('un_detalle_recipient_name', 'Yucith');
+        setRecipientName('Yucith');
+      }
+    } catch {
+      // ignore
+    }
+  }, []);
 
   // Fallbacks in case external images fail to load
   const [bowError, setBowError] = useState(false);
@@ -354,17 +381,22 @@ export default function App() {
             </div>
           </div>
 
-          {/* Firma discreta en la esquinita del sobre */}
-          <span
+          {/* Firma discreta en la esquinita del sobre con interacción para ver creador */}
+          <button
             id="envelope-author-signature"
-            className="absolute bottom-2.5 right-3.5 z-20 pointer-events-none select-none text-xs font-semibold text-amber-100/90 tracking-wide"
+            onClick={(e) => {
+              e.stopPropagation();
+              setShowCreatorModal(true);
+            }}
+            className="absolute bottom-2.5 right-3.5 z-30 select-none text-xs font-semibold text-amber-100/95 hover:text-white tracking-wide cursor-pointer group flex items-center gap-1 transition-all duration-300 hover:scale-105 active:scale-95"
             style={{
               fontFamily: "'Dancing Script', 'Caveat', cursive, sans-serif",
               textShadow: '0 1px 3px rgba(0, 0, 0, 0.4)',
             }}
+            title="Detalle creado por Temis (Haz clic para ver más)"
           >
-            De: Temis
-          </span>
+            <span>De: Temis</span>
+          </button>
         </div>
 
         {/* Shadow */}
@@ -412,17 +444,34 @@ export default function App() {
             : '♡ Pasa el cursor o haz clic en el sobre para leerlo ♡'}
         </p>
 
-        {/* Fecha de creación del detalle con tipografía bonita */}
-        <span
-          id="creation-date-footer"
-          className="text-base sm:text-lg text-rose-900/80 font-semibold tracking-wider select-none -mt-1"
-          style={{
-            fontFamily: "'Dancing Script', 'Caveat', cursive, sans-serif",
-          }}
-        >
-          14/09/2026
-        </span>
+        {/* Footer date centered & creator link below */}
+        <div className="flex flex-col items-center justify-center gap-1 -mt-1 select-none">
+          <span
+            id="creation-date-footer"
+            className="text-base sm:text-lg text-rose-900/80 font-semibold tracking-wider text-center"
+            style={{
+              fontFamily: "'Dancing Script', 'Caveat', cursive, sans-serif",
+            }}
+          >
+            14/09/2026
+          </span>
+
+          <button
+            onClick={() => setShowCreatorModal(true)}
+            className="inline-flex items-center justify-center text-[11px] font-medium text-rose-900/60 hover:text-rose-950 transition-colors px-2.5 py-0.5 rounded-full bg-rose-100/40 hover:bg-rose-100/80 border border-rose-200/50"
+            title="Conocer más sobre el creador"
+          >
+            <span>Creador</span>
+          </button>
+        </div>
       </div>
+
+      {/* Creator Modal Window */}
+      <CreatorModal
+        isOpen={showCreatorModal}
+        onClose={() => setShowCreatorModal(false)}
+        profileUrl="https://regal-alfajores-27eeae.netlify.app/"
+      />
     </div>
   );
 }

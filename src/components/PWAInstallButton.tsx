@@ -43,7 +43,7 @@ export const PWAInstallButton: React.FC<PWAInstallButtonProps> = ({ variant = 'g
 
       {showGuide && (
         <div
-          className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 backdrop-blur-sm p-4"
+          className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 backdrop-blur-sm p-4 animate-fade-in"
           style={{
             paddingTop: 'max(1rem, env(safe-area-inset-top, 0px))',
             paddingBottom: 'max(1rem, env(safe-area-inset-bottom, 0px))',
@@ -56,27 +56,55 @@ export const PWAInstallButton: React.FC<PWAInstallButtonProps> = ({ variant = 'g
             className="w-full max-w-xs rounded-2xl bg-neutral-900/95 text-neutral-100 p-6 shadow-2xl border border-white/15 text-center"
             onClick={(e) => e.stopPropagation()}
           >
+            <div className="w-10 h-10 mx-auto mb-2.5 rounded-full bg-amber-500/20 flex items-center justify-center text-xl">
+              🌻
+            </div>
             <h3 className="text-sm font-semibold text-white tracking-wide">
               Instalar en el móvil
             </h3>
-            <p className="mt-3 text-xs text-neutral-300 leading-relaxed text-left">
+            <p className="mt-1 text-[11px] text-amber-200/80">
+              Quedará como una app instalada en tu dispositivo
+            </p>
+
+            <div className="mt-4 text-xs text-neutral-300 leading-relaxed text-left bg-black/40 p-3.5 rounded-xl border border-white/5 space-y-2">
               {isIOS ? (
                 <>
-                  1. Pulsa el botón Compartir en Safari (barra inferior).<br />
-                  2. Selecciona «Agregar a inicio».
+                  <div className="flex items-start gap-2">
+                    <span className="font-bold text-amber-400">1.</span>
+                    <span>Toca el botón <strong>Compartir</strong> (icono <span className="inline-block border border-white/30 rounded px-1 text-[10px]">⎋</span>) en la barra inferior de Safari.</span>
+                  </div>
+                  <div className="flex items-start gap-2">
+                    <span className="font-bold text-amber-400">2.</span>
+                    <span>Desliza hacia abajo y toca <strong>«Agregar a inicio»</strong> (+).</span>
+                  </div>
+                  <div className="flex items-start gap-2">
+                    <span className="font-bold text-amber-400">3.</span>
+                    <span>Toca <strong>«Agregar»</strong>. Se abrirá como app propia en tu pantalla.</span>
+                  </div>
                 </>
               ) : (
                 <>
-                  1. Abre el menú de tu navegador (los tres puntos arriba a la derecha).<br />
-                  2. Selecciona «Instalar aplicación» o «Agregar a la pantalla principal».
+                  <div className="flex items-start gap-2">
+                    <span className="font-bold text-amber-400">1.</span>
+                    <span>Toca los <strong>tres puntos (⋮)</strong> arriba a la derecha en Chrome.</span>
+                  </div>
+                  <div className="flex items-start gap-2">
+                    <span className="font-bold text-amber-400">2.</span>
+                    <span>Toca la opción <strong>«Instalar aplicación»</strong> (con ícono de teléfono o flecha de descarga).</span>
+                  </div>
+                  <div className="flex items-start gap-2">
+                    <span className="font-bold text-amber-400">3.</span>
+                    <span>Toca <strong>«Instalar»</strong> para que se instale en tu cajón de apps.</span>
+                  </div>
                 </>
               )}
-            </p>
+            </div>
+
             <button
               onClick={() => setShowGuide(false)}
-              className="mt-5 w-full rounded-full bg-white/15 hover:bg-white/25 py-2 text-xs font-medium text-white transition-colors border border-white/10"
+              className="mt-5 w-full rounded-full bg-amber-500 hover:bg-amber-400 py-2 text-xs font-semibold text-neutral-950 transition-colors shadow-md"
             >
-              Cerrar
+              Entendido
             </button>
           </div>
         </div>
