@@ -220,13 +220,14 @@ export default function App() {
       {showMusicPlayer && (
         <div
           id="music-player-modal-container"
-          className="fixed z-50 animate-fade-in filter drop-shadow-2xl"
+          className="fixed z-50 filter drop-shadow-2xl inset-x-0 mx-auto w-full flex justify-center items-center pointer-events-none px-4"
           style={{
             bottom: 'max(1rem, calc(env(safe-area-inset-bottom, 0px) + 1rem))',
-            right: 'max(1rem, calc(env(safe-area-inset-right, 0px) + 1rem))',
           }}
         >
-          <DedicatedMusicPlayer onClose={handleToggleMusic} autoPlay={true} />
+          <div className="pointer-events-auto">
+            <DedicatedMusicPlayer onClose={handleToggleMusic} autoPlay={true} />
+          </div>
         </div>
       )}
 
