@@ -1,0 +1,8 @@
+{
+  "name": "Remix Un Detalle Para Ti",
+  "description": "Un detalle sincero y espontáneo con carta interactiva y jardín de girasoles bajo las estrellas.",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}
